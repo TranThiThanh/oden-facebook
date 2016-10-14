@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   after_create :send_welcome_email
 
+  has_many :friend_requests
+  has_many :pending_friend_requests, class_name: "FriendRequest", foreign_key: "friend_id"
+
   private
 
     def send_welcome_email
