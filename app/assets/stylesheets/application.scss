@@ -26,6 +26,10 @@
   @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text)
 }
 
-.notifications {
-  margin-top: 15px;
+.notification-btn {
+ margin-top: 10px;
+}
+
+.notifications-true {
+  color: #a94442;
 }
