@@ -11,6 +11,31 @@ class FriendRequestsController < ApplicationController
     end
   end
 
+  def approve
+    @request = FriendRequest.find(params[:id])
+    @request.approved = true
+    if @request.save
+      @recip = FriendRequest.new(user_id: current_user.id, friend_id: @request.user_id, approved: true)
+      @recip.save
+      flash[:success] = "Friend Request Approved!"
+      redirect_to user_path(@request.user_id)
+    else
+      flash[:danger] = "Something went wrong!"
+      redirect_to root_path
+    end
+  end
+
+  def destroy
+    @request = FriendRequest.find(params[:id])
+    if @request.destroy
+      flash[:success] = "Delete!"
+      redirect_to root_path
+    else
+      flash[:danger] = "Something went wrong!"
+      redirect_to root_path
+    end
+  end
+
   private
     def friend_request_params
       params.require(:friend_request).permit(:user_id, :friend_id)

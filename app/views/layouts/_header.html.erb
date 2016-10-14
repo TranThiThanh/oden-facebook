@@ -17,7 +17,28 @@
 	    <span class="badge">
 	      <%= current_user.pending_friend_requests.count %>
 	    </span>
-</button>
+	  </button>
+	  <% if current_user.pending_friend_requests.any? %>
+	    <ul class="dropdown-menu request-dropdown" aria-labelledby="dropdownMenu1">
+	      <% current_user.pending_friend_requests.each do |request| %>
+	        <li>
+		  <div class="row">
+		    <div class="col-md-6">
+		      <%= link_to request.user.email, user_path(request.user.id) %>
+		    </div>
+		    <div class="col-md-3">
+		      <%= form_for(request, url: approve_friend_request_path(request), method: :post) do |f| %>
+		        <%= f.submit 'Approve', class: 'btn btn-success' %>
+		      <% end %>
+		    </div>
+		    <div class="col-md-3">
+		      <%= link_to 'Delete', friend_request_path(request), method: :delete, class: 'btn btn-danger' %>
+		    </div>
+		  </div>
+		</li>
+	      <% end %>
+	    </ul>
+	  <% end %>
 	</li>
         <li>
           <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
