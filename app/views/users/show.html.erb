@@ -1,8 +1,12 @@
 <div class="row">
   <div class="col-md-12">
     <h1><%= @user.email %></h1>
-    <% if current_user != @user %>
-      <button class="btn btn-success">Friend</button>
+    <% if user_signed_in?  && current_user != @user %>
+      <%= form_for(@friend_request) do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :friend_id, value: @user.id %>
+        <%= f.submit 'Friend', class: 'btn btn-success' %>
+      <% end %>
     <% end %>
   </div>
 </div>
