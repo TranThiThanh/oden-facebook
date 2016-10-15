@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :friend_requests
   has_many :pending_friend_requests, class_name: "FriendRequest", foreign_key: "friend_id"
+  has_many :posts
 
   private
 
