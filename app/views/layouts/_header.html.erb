@@ -13,9 +13,9 @@
       <% if user_signed_in? %>
         <li>
 	  <button class="btn btn-default dropdown-toggle notification-btn" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	    <span class="glyphicon glyphicon-globe <%= "notifications-true" if current_user.pending_friend_requests.any? %>" aria-hidden="true"></span>
+	    <span class="glyphicon glyphicon-globe <%= "notifications-true" if current_user.pending_friend_requests.where(approved: false).any? %>" aria-hidden="true"></span>
 	    <span class="badge">
-	      <%= current_user.pending_friend_requests.count %>
+	      <%= current_user.pending_friend_requests.where(approved: false).count %>
 	    </span>
 	  </button>
 	  <% if current_user.pending_friend_requests.any? %>
