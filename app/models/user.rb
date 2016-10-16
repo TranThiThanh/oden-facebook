@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :relationships, class_name: "FriendRequest", foreign_key: "friend_id"
   has_many :friends, through: :relationships, source: :user
   has_many :posts
+  has_many :likes
 
   def post_feed
     friend_ids = self.friends.pluck(:id)
