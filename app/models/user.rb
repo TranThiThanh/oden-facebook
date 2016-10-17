@@ -19,6 +19,10 @@ class User < ApplicationRecord
     Post.where(user_id: friend_ids).reverse
   end
 
+  def likes_post?(post)
+    post.likes.where(user_id: id).any?
+  end
+
   private
 
     def send_welcome_email

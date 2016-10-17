@@ -5,5 +5,11 @@
   <div class="media-body">
     <h4 class="media-heading"><%= post.user.email %></h4>
     <p><%= post.content %></p>
+    
+    <p>
+      <small>
+	<%= render partial: 'likes', locals: {post: post} %>
+      </small>
+    </p>
   </div>
 </div>
