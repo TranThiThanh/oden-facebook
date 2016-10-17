@@ -1,0 +1,7 @@
+<%= form_for(Comment.new, :html => {class: 'form-inline'}) do |f| %>
+  <%= f.hidden_field :post_id, value: post.id %>
+  <div class="form-group">
+    <%= f.text_field :body, class: 'form-control' %>
+  </div>
+  <%= f.submit 'Comment', class: 'btn btn-default' %>
+<% end %>
