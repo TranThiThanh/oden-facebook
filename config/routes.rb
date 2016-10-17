@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :posts do
     resource :like, module: :posts
   end
+  resources :comments
   
   resources :friend_requests, only: [:create, :destroy] do
     member do 
