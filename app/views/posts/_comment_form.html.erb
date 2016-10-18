@@ -1,3 +1,18 @@
+<% post.comments.each do |comment| %>
+  <div class="media">
+    <div class="media-left">
+      <%= image_tag 'http://placehold.it/40x40' %>
+    </div>
+    <div class="media-body">
+      <a href="<%= user_path(comment.user) %>">
+	<h5 class="media-heading">
+	  <%= comment.user.email %>
+	</h5>
+      </a>
+      <%= comment.body %>
+    </div>
+  </div>
+<% end %>
 <%= form_for(Comment.new, :html => {class: 'form-inline'}) do |f| %>
   <%= f.hidden_field :post_id, value: post.id %>
   <div class="form-group">
