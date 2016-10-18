@@ -9,4 +9,9 @@ class UsersController < ApplicationController
     @friend_request = FriendRequest.new
   end
 
+  def edit
+    @user = User.find(params[:id])
+    @profile = Profile.where(user_id: current_user.id).first_or_create
+  end
+
 end

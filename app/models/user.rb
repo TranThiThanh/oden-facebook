@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :likes
   has_many :comments
+  has_one :profile
 
   def post_feed
     friend_ids = self.friends.pluck(:id)
