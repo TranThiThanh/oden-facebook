@@ -1,5 +1,8 @@
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-3">
+    <%= image_tag 'http://placehold.it/150x150' %>
+  </div>
+  <div class="col-md-9">
     <h1><%= @user.email %></h1>
     <% if user_signed_in?  && current_user != @user %>
       <%= form_for(@friend_request) do |f| %>
@@ -12,5 +15,13 @@
 	<% end %>
       <% end %>
     <% end %>
+    <div class="row">
+      <div class="col-md-12">
+	<h3>Posts</h3>
+	<% @user.posts.each do |post| %>
+	  <%= render post %>
+	<% end %>
+      </div>
+    </div>
   </div>
 </div>
