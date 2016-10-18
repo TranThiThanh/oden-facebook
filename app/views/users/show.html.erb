@@ -1,6 +1,10 @@
 <div class="row">
   <div class="col-md-3">
+    <% if @user.profile && @user.profile.picture %>
+      <%= image_tag @user.profile.picture %>
+    <% else %>
     <%= image_tag 'http://placehold.it/150x150' %>
+    <% end %>
   </div>
   <div class="col-md-9">
     <h1><%= @user.email %></h1>
