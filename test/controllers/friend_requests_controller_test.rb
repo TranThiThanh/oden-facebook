@@ -53,4 +53,30 @@ class FriendRequestsControllerTest < ActionDispatch::IntegrationTest
     friend_requests(:to_joe).reload
     assert friend_requests(:to_joe).approved
   end
+
+  #unverified user cannot delete friend request
+  test "unverified user cannot delete friend request" do
+    assert_no_difference 'FriendRequest.count' do
+      delete friend_request_path(@request)
+    end
+    assert_redirected_to new_user_session_path
+  end
+
+  #wrong user cannot delete friend request
+  test "wrong user cannot delete friend request" do
+    sign_in users(:nofriend)
+    assert_no_difference 'FriendRequest.count' do
+      delete friend_request_path(@request)
+    end
+    assert_redirected_to root_path
+  end
+  
+  #correct user can delete friend request
+  test "correct user can delete friend request" do
+    sign_in users(:joe)
+    assert_difference 'FriendRequest.count', -1 do
+      delete friend_request_path(@request)
+    end
+    assert_redirected_to root_path
+  end
 end

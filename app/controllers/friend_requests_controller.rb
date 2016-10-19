@@ -28,12 +28,18 @@ class FriendRequestsController < ApplicationController
 
   def destroy
     @request = FriendRequest.find(params[:id])
-    if @request.destroy
-      flash[:success] = "Delete!"
+    
+    if current_user.id != @request.friend_id
+      flash[:danger] = "You don't have permission to do that!"
       redirect_to root_path
     else
-      flash[:danger] = "Something went wrong!"
-      redirect_to root_path
+      if @request.destroy
+        flash[:success] = "Delete!"
+        redirect_to root_path
+      else
+        flash[:danger] = "Something went wrong!"
+        redirect_to root_path
+      end
     end
   end
 
