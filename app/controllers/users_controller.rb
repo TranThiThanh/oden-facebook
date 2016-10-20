@@ -12,7 +12,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    @profile = Profile.where(user_id: current_user.id).first_or_create
+    if current_user.id != @user.id
+      flash[:danger] = "You don't have permission to do that!"
+      redirect_to root_path
+    else
+      @profile = Profile.where(user_id: current_user.id).first_or_create
+    end
   end
 
 end
