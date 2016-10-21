@@ -16,5 +16,8 @@ frank:
 joe:
   email: joe@test.com
 
+mike:
+  email: mike@test.com
+
 nofriend:
   email: nofriend@email.com
