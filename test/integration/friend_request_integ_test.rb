@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FriendRequestTest < ActionDispatch::IntegrationTest
+class FriendRequestIntegTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   # test "the truth" do
   #   assert true
