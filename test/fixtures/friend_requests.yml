@@ -4,3 +4,13 @@ to_joe:
   user: frank
   friend: joe
   approved: false
+
+frank_to_sam:
+  user: frank
+  friend: sam
+  approved: true
+
+sam_to_frank:
+  user: sam
+  friend: frank
+  approved: true

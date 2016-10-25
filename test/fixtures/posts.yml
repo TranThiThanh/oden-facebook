@@ -3,7 +3,18 @@
 first_post:
   content: This is a test comment
   user: frank
+  created_at: <%= 42.days.ago.to_datetime %>
 
-two:
-  content: MyText
-  user_id: 1
+newest:
+  content: new post
+  user: sam
+  created_at: <%= 1.minute.ago.to_datetime %>
+
+mikes:
+  content: this is mike
+  user: mike
+
+not_friends:
+  content: I'm not your friend
+  user: nofriend
+  

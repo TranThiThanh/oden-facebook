@@ -18,7 +18,7 @@ class User < ApplicationRecord
   def post_feed
     friend_ids = self.friends.pluck(:id)
     friend_ids.push(self.id)
-    Post.where(user_id: friend_ids).reverse
+    Post.where(user_id: friend_ids).order(created_at: :desc)
   end
 
   def likes_post?(post)

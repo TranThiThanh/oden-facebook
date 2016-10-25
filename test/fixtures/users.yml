@@ -19,5 +19,8 @@ joe:
 mike:
   email: mike@test.com
 
+sam:
+  email: sam@test.com
+
 nofriend:
   email: nofriend@email.com

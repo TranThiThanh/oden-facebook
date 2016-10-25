@@ -32,4 +32,22 @@ class UserPostTest < ActionDispatch::IntegrationTest
     end
   end
 
+  #test order of posts
+  test "post display order" do
+    first_post = posts(:first_post)
+    new_post = posts(:newest)
+    not_friend_post = posts(:not_friends)
+    sign_in @frank
+    get posts_path
+    assert_response :success
+    assert_select "div#post_#{first_post.id}"
+    assert_select "div#post_#{new_post.id}"
+
+    #make sure non-friends' posts don't display
+    assert_select "div#post_#{not_friend_post.id}", count: 0
+    
+    #test that older post displays below newer post
+    assert response.body.index(first_post.content) > response.body.index(new_post.content)
+  end
+
 end
