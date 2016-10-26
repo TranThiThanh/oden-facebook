@@ -8,6 +8,7 @@ class UserProfileTest < ActionDispatch::IntegrationTest
 
   def setup
     @frank = users(:frank)
+    @sam = users(:sam)
     @profile_image = 'test/fixtures/profile_image.jpg'
   end
 
@@ -23,7 +24,7 @@ class UserProfileTest < ActionDispatch::IntegrationTest
     assert_equal "You need to sign in or sign up before continuing.", flash[:alert]
   end
 
-  #verified user can upload picture
+  #verified user can upload picture and show view displays it
   test "verified user can upload profile picture" do
     assert_nil @frank.profile
     file = Rack::Test::UploadedFile.new(@profile_image, "image/jpg")
@@ -36,5 +37,13 @@ class UserProfileTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_path(@frank)
     follow_redirect!
     assert_select "img[src=?]", @frank.profile.picture.url
+  end
+
+  #show user view displays user info
+  test "user profile shows user info" do
+    sign_in @sam
+    get user_path(@frank)
+    assert_select "h1", @frank.email
+    assert_select "img[src=?]", 'http://placehold.it/150x150'
   end
 end
